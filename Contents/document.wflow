@@ -51,7 +51,7 @@
 				<key>ActionParameters</key>
 				<dict>
 					<key>source</key>
-					<string>on run {input, parameters}		local theURL, theTitle, theUser		set theUser to short user name of (system info)		tell application "Safari"		set theURL to URL of front document		set theTitle to name of front document	end tell		set iconPath to ":Applications:Evernote.app:Contents:Resources:Evernote.icns"	set dialogMsg to "Bookmark Title:"	tell application "System Events"		if exists file iconPath then			display dialog dialogMsg buttons {"OK", "Cancel"} default button "OK" with icon file iconPath default answer theTitle		else			display dialog dialogMsg buttons {"OK", "Cancel"} default button "OK" default answer theTitle		end if	end tell	set theTitle to text returned of result		tell application "Evernote"				set notebook_name to theUser &amp; "'s notebook"				if (not (notebook named notebook_name exists)) then			make notebook with properties {name:notebook_name}		end if				set this_notebook to notebook notebook_name				set this_note to create note with text (theURL as string) title theTitle notebook this_notebook			end tell		return inputend run</string>
+					<string>on run {input, parameters}		local theURL, theTitle, theUser		set theUser to short user name of (system info)		tell application "Safari"		set theURL to URL of front document		set theTitle to name of front document	end tell		set iconPath to ":Applications:Evernote.app:Contents:Resources:Evernote.icns"	set dialogMsg to "Bookmark Title:"	tell application "System Events"		if exists file iconPath then			display dialog dialogMsg buttons {"OK", "Cancel"} default button "OK" with icon file iconPath default answer theTitle		else			display dialog dialogMsg buttons {"OK", "Cancel"} default button "OK" default answer theTitle		end if	end tell	set theTitle to text returned of result		tell application "Evernote"				if not (exists window 1) then			open window 1			tell application "System Events" to set visible of process "Evernote" to false			set everNoteOpen to false		else			set everNoteOpen to true		end if				set notebook_name to theUser &amp; "'s notebook"				if (not (notebook named notebook_name exists)) then			make notebook with properties {name:notebook_name}		end if				set this_notebook to notebook notebook_name				set this_note to create note with text (theURL as string) title theTitle notebook this_notebook				if not everNoteOpen then			quit		end if			end tell		return inputend run</string>
 				</dict>
 				<key>BundleIdentifier</key>
 				<string>com.apple.Automator.RunScript</string>
@@ -102,12 +102,10 @@ end run</string>
 						<string>0</string>
 					</dict>
 				</dict>
-				<key>conversionLabel</key>
-				<integer>0</integer>
 				<key>isViewVisible</key>
 				<true/>
 				<key>location</key>
-				<string>529.500000:550.000000</string>
+				<string>518.000000:948.000000</string>
 				<key>nibPath</key>
 				<string>/System/Library/Automator/Run AppleScript.action/Contents/Resources/English.lproj/main.nib</string>
 			</dict>
